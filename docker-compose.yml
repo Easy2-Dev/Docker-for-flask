@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  machi_api:
+    build: 
+      context: .
+      dockerfile: ./Dockerfiles/app.Dockerfile
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/app
+    container_name: machi_api
+
+  mariadb:
+    image: mariadb:10.7
+    ports:
+      - 3306:3306
+    volumes:
+      - ./volumes/mariadb:/var/lib/mysql
+    env_file:
+      - ./env/mysql.env
